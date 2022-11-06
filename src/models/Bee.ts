@@ -1,11 +1,11 @@
-export default class Bee{
+export default class Bee {
     id: number;
     role: string;
     lp: number;
     hp: number
     lossPerHit: number;
-    constructor(id: number, role: string, lp: number, hp: number, lossPerHit: number)
-    {
+
+    constructor(id: number, role: string, lp: number, hp: number, lossPerHit: number){
         this.id = id;
         this.role = role;
         this.lp = lp;
@@ -13,8 +13,7 @@ export default class Bee{
         this.lossPerHit = lossPerHit;
     }
 
-    public getHit()
-    {
+    getHit(){
         this.hp-= this.lossPerHit;
     }
 }
