@@ -1,12 +1,7 @@
 import Bee from '@/models/Bee';
 import BeeFactory from '@/services/BeeFactory';
 import BeeRoles from '@/types/BeeRoles';
-
-const BEE_NUMBERS: Record<BeeRoles, number> = {
-    queen: 1,
-    worker: 5,
-    scout: 8,
-};
+import BeeNumbers from '@/types/BeeNumbers';
 
 export default class HiveFactory {
     static beeCounter: number = 0;
@@ -22,11 +17,18 @@ export default class HiveFactory {
 
     static createBees(Beetype: BeeRoles) {
         const bees : Bee[] = [];
-        for (let i = 1; i <= BEE_NUMBERS[Beetype]; i++){
+        for (let i = 1; i <= BeeNumbers[Beetype]; i++){
             bees.push(BeeFactory.createBee(Beetype, this.beeCounter));
             this.beeCounter++;
         }
 
         return bees;
+    }
+
+    static restoreBeeTypeArray(bees: Bee[]) {
+        const restoredBees : Bee[] = []
+        bees.forEach(bee => restoredBees.push(new Bee(bee.id, bee.role, bee.lp, bee.hp, bee.lossPerHit)))
+
+        return restoredBees;
     }
 }
