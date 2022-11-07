@@ -29,12 +29,13 @@ export default class HiveService {
     static hitRandomBee() {
         const hive: [] = JSON.parse(String( HiveRepository.getHiveState()));
         const beeHive: Bee[] = HiveFactory.restoreBeeTypeArray(hive);
-        const liveBees: Bee[] =this.getLiveBees(beeHive);
+        const liveBees: Bee[] = this.getLiveBees(beeHive);
 
         const randomIndex = Math.floor(Math.random() * liveBees.length);
         const randomBee: Bee = beeHive[randomIndex];
 
         randomBee.getHit();
+        randomBee.setAsLastHit();
         randomBee.lp = randomBee.lp <= 0 ? 0 : randomBee.lp;
 
         HiveRepository.updateHiveState(beeHive);

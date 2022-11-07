@@ -1,6 +1,6 @@
 <template>
     <div>
-        <SingleBee v-for="(bee, index) in hive" :id="bee.id" :lp="bee.lp" :role="bee.role" :hp="bee.hp" :key="index" />
+        <SingleBee v-for="(bee, index) in hive" :id="bee.id" :lp="bee.lp" :role="bee.role" :hp="bee.hp" :isLastHit="bee.isLastHit" :key="index" />
         <HitBee v-on:BeeHit="updateHive"></HitBee>
     </div>
 </template>
