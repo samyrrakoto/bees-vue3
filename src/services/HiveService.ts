@@ -5,7 +5,7 @@ export default class HiveService {
     static createNewHive() {
         let hive = HiveFactory.createHive();
         hive = this.shuffleHive(hive);
-        localStorage.setItem('hive', JSON.stringify(hive));
+        this.updateHive(hive);
 
         return hive;
     }
@@ -21,24 +21,27 @@ export default class HiveService {
         return hive;
     }
 
+    static updateHive(hive: Bee[]) {
+        localStorage.setItem('hive', JSON.stringify(hive));
+    }
+
     static getLiveBees(hive: Bee[]) {
         return hive.filter(bee => bee.lp > 0);
     }
 
     static hitRandomBee() {
-        const jsonHive = localStorage.getItem('hive');
-        const hive = jsonHive ? JSON.parse(jsonHive) : [];
-        console.log(hive);
-        const liveBees = jsonHive ? this.getLiveBees(hive) : [];
-        console.log(liveBees);
-        const randomLiveBee = function (min: number, max: number) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min) + min);
-        };
-        const bee: Bee = hive[randomLiveBee(0, liveBees.length)];
-        localStorage.setItem('hive', JSON.stringify(hive));
-        console.log(bee);
-        console.log(bee instanceof Bee);
+        const jsonHive: string | null = localStorage.getItem('hive');
+        const hive: [] = jsonHive ? JSON.parse(jsonHive) : [];
+
+        const beeHive: Bee[] = HiveFactory.restoreBeeTypeArray(hive);
+        const liveBees: Bee[] = beeHive ? this.getLiveBees(beeHive) : [];
+
+        const randomIndex = Math.floor(Math.random() * liveBees.length);
+        const randomBee: Bee = liveBees[randomIndex];
+
+        randomBee.getHit();
+        randomBee.lp = randomBee.lp <= 0 ? 0 : randomBee.lp;
+
+        this.updateHive(beeHive);
     }
 }

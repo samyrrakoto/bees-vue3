@@ -4,6 +4,7 @@ export default class Bee {
     lp: number;
     hp: number
     lossPerHit: number;
+    isLastHit: boolean = false;
 
     constructor(id: number, role: string, lp: number, hp: number, lossPerHit: number){
         this.id = id;
@@ -14,6 +15,10 @@ export default class Bee {
     }
 
     getHit(){
-        this.hp-= this.lossPerHit;
+        this.lp-= this.lossPerHit;
+    }
+
+    setAsLastHit() {
+        this.isLastHit = true;
     }
 }

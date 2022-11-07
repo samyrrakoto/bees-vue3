@@ -10,7 +10,6 @@ import HiveService from '@/services/HiveService';
 export default {
         methods: {
             hitABee() {
-                console.log("mama, just killeda bee")
                 HiveService.hitRandomBee()
             },
         },
