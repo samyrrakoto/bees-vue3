@@ -29,15 +29,37 @@ export default class HiveService {
     static hitRandomBee() {
         const hive: [] = JSON.parse(String( HiveRepository.getHiveState()));
         const beeHive: Bee[] = HiveFactory.restoreBeeTypeArray(hive);
-        const liveBees: Bee[] = this.getLiveBees(beeHive);
 
-        const randomIndex = Math.floor(Math.random() * liveBees.length);
-        const randomBee: Bee = beeHive[randomIndex];
+        const livesBeesIndexes: number[] = this.getLiveBeesIndexes(beeHive);
+        const randomIndex: number = Math.floor(Math.random() * livesBeesIndexes.length);
+        const randomBee: Bee = beeHive[livesBeesIndexes[randomIndex]];
 
         randomBee.getHit();
         randomBee.setAsLastHit();
         randomBee.lp = randomBee.lp <= 0 ? 0 : randomBee.lp;
+        this.checkQueenIsDead(randomBee);
 
         HiveRepository.updateHiveState(beeHive);
+    }
+
+    static getLiveBeesIndexes(bees: Bee[]) {
+        const livesBeesIndexes: number[] = [];
+        let i: number = 0;
+        bees.forEach(bee => {
+            if (bee.lp > 0){
+                livesBeesIndexes.push(i);
+            }
+            i++;
+        });
+
+        return livesBeesIndexes;
+    }
+
+    static checkQueenIsDead(bee: Bee) {
+        if (bee.role === "queen") {
+            if (bee.lp === 0) {
+                console.log("God save the queen !");
+            }
+        }
     }
 }
