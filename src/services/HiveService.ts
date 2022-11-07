@@ -27,11 +27,9 @@ export default class HiveService {
     }
 
     static hitRandomBee() {
-        const jsonHive: string | null = HiveRepository.getHiveState();
-        const hive: [] = jsonHive ? JSON.parse(jsonHive) : [];
-
+        const hive: [] = JSON.parse(String( HiveRepository.getHiveState()));
         const beeHive: Bee[] = HiveFactory.restoreBeeTypeArray(hive);
-        const liveBees: Bee[] = beeHive ? this.getLiveBees(beeHive) : [];
+        const liveBees: Bee[] =this.getLiveBees(beeHive);
 
         const randomIndex = Math.floor(Math.random() * liveBees.length);
         const randomBee: Bee = beeHive[randomIndex];
