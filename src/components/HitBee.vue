@@ -6,12 +6,14 @@
 
 <script lang="ts">
 import HiveService from '@/services/HiveService';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
         methods: {
             hitABee() {
-                HiveService.hitRandomBee()
+                HiveService.hitRandomBee();
+                this.$emit('BeeHit');
             },
         },
-    }
+})
 </script>

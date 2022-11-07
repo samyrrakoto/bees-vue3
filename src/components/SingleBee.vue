@@ -5,8 +5,9 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 
-export default{
+export default defineComponent({
     props: {
         id: {
             type: Number,
@@ -25,7 +26,7 @@ export default{
             required: true,
         },
     }
-}
+})
 </script>
 
 <style scoped>
