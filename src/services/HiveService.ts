@@ -1,11 +1,12 @@
 import Bee from "@/models/Bee";
 import HiveFactory from "./HiveFactory";
+import HiveRepository from "./HiveRepository";
 
 export default class HiveService {
     static createNewHive() {
         let hive = HiveFactory.createHive();
         hive = this.shuffleHive(hive);
-        this.updateHive(hive);
+        HiveRepository.updateHiveState(hive);
 
         return hive;
     }
@@ -21,27 +22,23 @@ export default class HiveService {
         return hive;
     }
 
-    static updateHive(hive: Bee[]) {
-        localStorage.setItem('hive', JSON.stringify(hive));
-    }
-
     static getLiveBees(hive: Bee[]) {
         return hive.filter(bee => bee.lp > 0);
     }
 
     static hitRandomBee() {
-        const jsonHive: string | null = localStorage.getItem('hive');
+        const jsonHive: string | null = HiveRepository.getHiveState();
         const hive: [] = jsonHive ? JSON.parse(jsonHive) : [];
 
         const beeHive: Bee[] = HiveFactory.restoreBeeTypeArray(hive);
         const liveBees: Bee[] = beeHive ? this.getLiveBees(beeHive) : [];
 
         const randomIndex = Math.floor(Math.random() * liveBees.length);
-        const randomBee: Bee = liveBees[randomIndex];
+        const randomBee: Bee = beeHive[randomIndex];
 
         randomBee.getHit();
         randomBee.lp = randomBee.lp <= 0 ? 0 : randomBee.lp;
 
-        this.updateHive(beeHive);
+        HiveRepository.updateHiveState(beeHive);
     }
 }
