@@ -11,8 +11,12 @@ import { defineComponent } from 'vue';
 export default defineComponent({
         methods: {
             hitABee() {
-                HiveService.hitRandomBee();
-                this.$emit('BeeHit');
+                const isQueenDead: boolean = HiveService.hitRandomBee();
+                if (!isQueenDead) {
+                    this.$emit('BeeHit');
+                } else {
+                    this.$emit('QueenDead')
+                }
             },
         },
 })

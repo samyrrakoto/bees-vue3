@@ -37,9 +37,10 @@ export default class HiveService {
         randomBee.getHit();
         randomBee.setAsLastHit();
         randomBee.lp = randomBee.lp <= 0 ? 0 : randomBee.lp;
-        this.checkQueenIsDead(randomBee);
-
         HiveRepository.updateHiveState(beeHive);
+        const isQueenDead: boolean = this.checkQueenIsDead(randomBee, beeHive);
+
+        return isQueenDead;
     }
 
     static getLiveBeesIndexes(bees: Bee[]) {
@@ -55,11 +56,12 @@ export default class HiveService {
         return livesBeesIndexes;
     }
 
-    static checkQueenIsDead(bee: Bee) {
+    static checkQueenIsDead(bee: Bee, beeHive: Bee[]) {
         if (bee.role === "queen") {
             if (bee.lp === 0) {
-                console.log("God save the queen !");
+                return true;
             }
         }
+        return false;
     }
 }

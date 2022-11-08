@@ -1,7 +1,7 @@
 <template>
     <div>
         <SingleBee v-for="(bee, index) in hive" :id="bee.id" :lp="bee.lp" :role="bee.role" :hp="bee.hp" :isLastHit="bee.isLastHit" :key="index" />
-        <HitBee v-on:BeeHit="updateHive"></HitBee>
+        <HitBee v-on:BeeHit="updateHive" v-on:QueenDead="createNewGame"></HitBee>
     </div>
 </template>
 
@@ -26,12 +26,15 @@ export default defineComponent({
         if (beeState) {
             this.updateHive();
         } else {
-            this.hive = HiveService.createNewHive();
+            this.createNewGame();
         }
     },
     methods: {
         updateHive(){
             this.hive = JSON.parse(String(HiveRepository.getHiveState())) as Bee[];
+        },
+        createNewGame() {
+            this.hive = HiveService.createNewHive();
         }
     },
     components: {
