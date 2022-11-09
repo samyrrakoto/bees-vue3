@@ -1,11 +1,11 @@
 <template>
-    <div class="bee" :class="classesToToggle" >
-        <span>#{{ bee?.id }}</span> -
-        <span>{{ beemojis[bee?.role] }}</span>
-        <span>{{ bee?.role }}</span> -
-        <span>{{ bee?.lp }}</span> /
-        <span>{{ bee?.hp }}</span>
-        <span v-if="bee?.lp == 0"> 💀</span>
+    <div class="bee" :class="classesToToggle">
+        <span>#{{ bee.id }}</span> -
+        <span>{{ beemojis[bee.role] }}</span>
+        <span>{{ bee.role }}</span> -
+        <span>{{ bee.lp }}</span> /
+        <span>{{ bee.hp }}</span>
+        <span v-if="bee.lp == 0"> 💀</span>
     </div>
 </template>
 
@@ -25,18 +25,20 @@ export default defineComponent({
         return {
             beemojis: BEEMOJIS,
             classesToToggle: {
-                queen: this.bee?.role == 'queen',
-                worker: this.bee?.role == 'worker',
-                scout: this.bee?.role == 'scout',
-                lastHit: this.bee?.isLastHit,
-                isDead: this.bee?.lp == 0,
-                'shake-little': this.isLastHit,
-                'shake-constant': this.isLastHit,
+                queen: this.bee.role == 'queen',
+                worker: this.bee.role == 'worker',
+                scout: this.bee.role == 'scout',
+                lastHit: this.bee.isLastHit,
+                isDead: this.bee.lp == 0,
+
             },
         }
     },
     props: {
-        bee: Bee,
+        bee: {
+            type: Bee,
+            required: true,
+        }
     }
 })
 </script>
@@ -142,5 +144,9 @@ export default defineComponent({
 .isDead {
     color:gray !important;
     font-weight: bold;
+}
+
+.false{
+    color:red;
 }
 </style>
