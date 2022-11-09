@@ -32,7 +32,12 @@ export default class HiveFactory {
 
     static restoreBeeTypeArray(bees: Bee[]) {
         const restoredBees : Bee[] = []
-        bees.forEach(bee => restoredBees.push(new Bee(bee.id, bee.role, bee.lp, bee.hp, bee.lossPerHit)))
+        bees.forEach(bee => {
+                const restoredBee = new Bee(bee.id, bee.role, bee.lp, bee.hp, bee.lossPerHit);
+                restoredBee.isLastHit = bee.isLastHit;
+                restoredBees.push(restoredBee);
+            }
+        )
 
         return restoredBees;
     }

@@ -24,15 +24,18 @@ export default defineComponent({
     data() {
         return {
             beemojis: BEEMOJIS,
-            classesToToggle: {
+        }
+    },
+    computed: {
+        classesToToggle() {
+            return {
                 queen: this.bee.role == 'queen',
                 worker: this.bee.role == 'worker',
                 scout: this.bee.role == 'scout',
                 lastHit: this.bee.isLastHit,
                 isDead: this.bee.lp == 0,
-
-            },
-        }
+            }
+        },
     },
     props: {
         bee: {

@@ -13,6 +13,7 @@ import HitBee from './HitBee.vue';
 import HiveRepository from '../services/HiveRepository';
 import SingleBee from '@/components/SingleBee.vue';
 import HiveService from '../services/HiveService';
+import HiveFactory from '../services/HiveFactory';
 
 
 export default defineComponent({
@@ -32,7 +33,7 @@ export default defineComponent({
     },
     methods: {
         updateHive(){
-            this.hive = JSON.parse(String(HiveRepository.getHiveState())) as Bee[];
+            this.hive = HiveFactory.restoreBeeTypeArray(JSON.parse(String(HiveRepository.getHiveState())));
         },
         createNewGame() {
             this.hive = HiveService.createNewHive();
