@@ -1,49 +1,42 @@
 <template>
-    <div class="bee" :class="{ queen: role == 'queen', worker: role == 'worker', scout: role == 'scout', lastHit: isLastHit, isDead: lp == 0, 'shake-little': isLastHit, 'shake-constant': isLastHit}" >
-        <span>#{{ id }}</span> -
-        <span>{{ beeRole[role] }}</span>
-        <span>{{ role }}</span> -
-        <span>{{ lp }}</span> /
-        <span>{{ hp }}</span>
-        <span v-if="lp == 0"> 💀</span>
+    <div class="bee" :class="classesToToggle" >
+        <span>#{{ bee?.id }}</span> -
+        <span>{{ beemojis[bee?.role] }}</span>
+        <span>{{ bee?.role }}</span> -
+        <span>{{ bee?.lp }}</span> /
+        <span>{{ bee?.hp }}</span>
+        <span v-if="bee?.lp == 0"> 💀</span>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import BeeRoles from '@/types/BeeRoles';
+import Bee from '@/models/Bee';
+
+const BEEMOJIS: Record<BeeRoles, String> = {
+    queen: '👑',
+    worker: '🐝',
+    scout: '🪖',
+}
 
 export default defineComponent({
     data() {
         return {
-            beeRole: {
-                queen: '👑',
-                worker: '🐝',
-                scout: '🪖',
-            }
+            beemojis: BEEMOJIS,
+            classesToToggle: {
+                queen: this.bee?.role == 'queen',
+                worker: this.bee?.role == 'worker',
+                scout: this.bee?.role == 'scout',
+                lastHit: this.bee?.isLastHit,
+                isDead: this.bee?.lp == 0,
+                'shake-little': this.isLastHit,
+                'shake-constant': this.isLastHit,
+            },
         }
     },
     props: {
-        id: {
-            type: Number,
-            required : true,
-        },
-        role: {
-            type: Object as PropType<BeeRoles>,
-            required: true,
-        },
-        lp: {
-            type: Number,
-            required: true,
-        },
-        hp: {
-            type: Number,
-            required: true,
-        },
-        isLastHit: {
-            type: Boolean,
-            required: false,
-        }
+        bee: Bee,
     }
 })
 </script>
