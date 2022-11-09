@@ -1,9 +1,7 @@
 <template>
     <div class="bee" :class="{ queen: role == 'queen', worker: role == 'worker', scout: role == 'scout', lastHit: isLastHit, isDead: lp == 0, 'shake-little': isLastHit, 'shake-constant': isLastHit}" >
         <span>#{{ id }}</span> -
-        <span v-if="role == 'queen'">👑</span>
-        <span v-if="role == 'worker'">🐝</span>
-        <span v-if="role == 'scout'">🪖</span>
+        <span>{{ beeRole[role] }}</span>
         <span>{{ role }}</span> -
         <span>{{ lp }}</span> /
         <span>{{ hp }}</span>
@@ -12,16 +10,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+import BeeRoles from '@/types/BeeRoles';
 
 export default defineComponent({
+    data() {
+        return {
+            beeRole: {
+                queen: '👑',
+                worker: '🐝',
+                scout: '🪖',
+            }
+        }
+    },
     props: {
         id: {
             type: Number,
             required : true,
         },
         role: {
-            type: String,
+            type: Object as PropType<BeeRoles>,
             required: true,
         },
         lp: {
