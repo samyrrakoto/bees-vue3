@@ -16,11 +16,11 @@ export default class Bee {
         this.lossPerHit = lossPerHit;
     }
 
-    getHit(){
+    getHit(): void{
         this.lp-= this.lossPerHit;
     }
 
-    setAsLastHit() {
+    setAsLastHit(): void {
         this.isLastHit = true;
     }
 }

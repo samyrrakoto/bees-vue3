@@ -7,8 +7,8 @@ import { defineComponent } from 'vue';
 import HiveService from '@/services/HiveService';
 
 export default defineComponent({
-        methods: {
-            hitABee() {
+    methods: {
+        hitABee(): void {
                 const isQueenDead: boolean = HiveService.hitRandomBee();
                 if (!isQueenDead) {
                     this.$emit('BeeHit');

@@ -3,7 +3,7 @@ import BEE_CREATION_DETAILS from '@/utils/BeeCreationDetails';
 import BeeRoles from '@/types/BeeRoles';
 
 export default class BeeFactory{
-    static createBee(type: BeeRoles, id: number){
+    static createBee(type: BeeRoles, id: number): Bee{
         return new Bee(id, type, BEE_CREATION_DETAILS[type].hp, BEE_CREATION_DETAILS[type].hp, BEE_CREATION_DETAILS[type].lossPerHit)
     }
 }

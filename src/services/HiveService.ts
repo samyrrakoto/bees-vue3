@@ -3,8 +3,8 @@ import HiveFactory from "@/services/HiveFactory";
 import HiveRepository from "@/services/HiveRepository";
 
 export default class HiveService {
-    static createNewHive() {
-        let hive = HiveFactory.createHive();
+    static createNewHive(): Bee[] {
+        let hive: Bee[] = HiveFactory.createHive();
         hive = this.shuffleHive(hive);
         HiveRepository.updateHiveState(hive);
 
@@ -12,9 +12,9 @@ export default class HiveService {
     }
 
     static shuffleHive(hive: Bee[]) {
-        for (let i = hive.length - 1; i > 0; i--) {
+        for (let i: number = hive.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
-            const temp = hive[i];
+            const temp: Bee = hive[i];
             hive[i] = hive[j];
             hive[j] = temp;
         }
@@ -22,11 +22,11 @@ export default class HiveService {
         return hive;
     }
 
-    static getLiveBees(hive: Bee[]) {
+    static getLiveBees(hive: Bee[]): Bee[] {
         return hive.filter(bee => bee.lp > 0);
     }
 
-    static hitRandomBee() {
+    static hitRandomBee(): boolean {
         const hive: [] = JSON.parse(String( HiveRepository.getHiveState()));
         const beeHive: Bee[] = HiveFactory.restoreBeeTypeArray(hive);
 
@@ -45,7 +45,7 @@ export default class HiveService {
         return isQueenDead;
     }
 
-    static getLiveBeesIndexes(bees: Bee[]) {
+    static getLiveBeesIndexes(bees: Bee[]): number[] {
         const livesBeesIndexes: number[] = [];
         let i: number = 0;
         bees.forEach(bee => {
@@ -58,7 +58,7 @@ export default class HiveService {
         return livesBeesIndexes;
     }
 
-    static checkQueenIsDead(bee: Bee) {
+    static checkQueenIsDead(bee: Bee): boolean {
         if (bee.role === "queen") {
             if (bee.lp === 0) {
                 return true;
@@ -67,7 +67,7 @@ export default class HiveService {
         return false;
     }
 
-    static setAllOtherBeesNonLastHit(randomBee: Bee, beeHive: Bee[]) {
+    static setAllOtherBeesNonLastHit(randomBee: Bee, beeHive: Bee[]): void {
         for (let i = 0; i < beeHive.length; i++)
         {
             if (randomBee === beeHive[i])

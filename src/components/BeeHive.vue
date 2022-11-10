@@ -32,10 +32,10 @@ export default defineComponent({
         }
     },
     methods: {
-        updateHive(){
+        updateHive(): void {
             this.hive = HiveFactory.restoreBeeTypeArray(JSON.parse(String(HiveRepository.getHiveState())));
         },
-        createNewGame() {
+        createNewGame(): void {
             this.hive = HiveService.createNewHive();
         }
     },
