@@ -11,8 +11,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import BeeRoles from '@/types/BeeRoles';
 import Bee from '@/models/Bee';
+import BeeRoles from '@/types/BeeRoles';
 
 const BEEMOJIS: Record<BeeRoles, String> = {
     queen: '👑',

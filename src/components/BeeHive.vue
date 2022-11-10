@@ -9,11 +9,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Bee from '@/models/Bee';
-import HitBee from './HitBee.vue';
-import HiveRepository from '../services/HiveRepository';
+import HitBee from '@/components/HitBee.vue';
+import HiveRepository from '@/services/HiveRepository';
+import HiveService from '@/services/HiveService';
+import HiveFactory from '@/services/HiveFactory';
 import SingleBee from '@/components/SingleBee.vue';
-import HiveService from '../services/HiveService';
-import HiveFactory from '../services/HiveFactory';
 
 
 export default defineComponent({
@@ -40,8 +40,8 @@ export default defineComponent({
         }
     },
     components: {
-        SingleBee,
         HitBee,
+        SingleBee,
     }
 })
 </script>

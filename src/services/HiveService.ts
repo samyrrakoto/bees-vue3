@@ -1,6 +1,6 @@
 import Bee from "@/models/Bee";
-import HiveFactory from "./HiveFactory";
-import HiveRepository from "./HiveRepository";
+import HiveFactory from "@/services/HiveFactory";
+import HiveRepository from "@/services/HiveRepository";
 
 export default class HiveService {
     static createNewHive() {

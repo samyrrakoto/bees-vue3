@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import HiveService from '@/services/HiveService';
 import { defineComponent } from 'vue';
+import HiveService from '@/services/HiveService';
 
 export default defineComponent({
         methods: {
