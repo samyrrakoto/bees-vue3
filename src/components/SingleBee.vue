@@ -16,7 +16,7 @@ import BEE_CREATION_DETAILS from '../utils/BeeCreationDetails';
 
 export default defineComponent({
     computed: {
-        classesToToggle(): object {
+        classesToToggle(): Record<string, boolean> {
             return {
                 queen: this.bee.role == 'queen',
                 worker: this.bee.role == 'worker',
