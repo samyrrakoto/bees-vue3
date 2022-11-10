@@ -10,7 +10,7 @@ export default class HiveFactory {
         const bees: Bee[] = [];
 
         Object.entries(BEE_CREATION_DETAILS).forEach(([beeType, beeTypeObject]) =>{
-            const amount: number = Object.entries(beeTypeObject)[0][1] as number;
+            const amount: number = beeTypeObject.amount;
             for (let i: number = 1; i <= amount; i++) {
                 bees.push(BeeFactory.createBee(beeType as BeeRoles, this.beeCounter));
                 this.beeCounter++;
