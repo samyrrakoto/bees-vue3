@@ -1,7 +1,7 @@
 <template>
     <div class="bee" :class="classesToToggle">
         <span>#{{ bee.id }}</span> -
-        <span>{{ beemojis[bee.role] }}</span>
+        <span>{{ beemoji }}</span>
         <span>{{ bee.role }}</span> -
         <span>{{ bee.lp }}</span> /
         <span>{{ bee.hp }}</span>
@@ -12,21 +12,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Bee from '@/models/Bee';
-import BeeRoles from '@/types/BeeRoles';
-
-const BEEMOJIS: Record<BeeRoles, String> = {
-    queen: '👑',
-    worker: '🐝',
-    scout: '🪖',
-    useless: '🗿',
-}
+import BEE_CREATION_DETAILS from '../utils/BeeCreationDetails';
 
 export default defineComponent({
-    data() {
-        return {
-            beemojis: BEEMOJIS,
-        }
-    },
     computed: {
         classesToToggle() {
             return {
@@ -38,6 +26,9 @@ export default defineComponent({
                 isDead: this.bee.lp == 0,
             }
         },
+        beemoji() {
+            return BEE_CREATION_DETAILS[this.bee.role].beemoji
+        }
     },
     props: {
         bee: {
