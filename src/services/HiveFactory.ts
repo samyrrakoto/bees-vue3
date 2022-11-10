@@ -1,31 +1,25 @@
 import Bee from '@/models/Bee';
+import BEE_CREATION_DETAILS from '@/utils/BeeCreationDetails';
 import BeeFactory from '@/services/BeeFactory';
 import BeeRoles from '@/types/BeeRoles';
-
-const BEE_NUMBERS: Record<BeeRoles, number> = {
-    queen: 1,
-    worker: 5,
-    scout: 8,
-};
 
 export default class HiveFactory {
     static beeCounter: number = 0;
 
     static createHive() {
-        const queens = this.createBees('queen');
-        const workers = this.createBees('worker');
-        const scouts = this.createBees('scout');
-        const bees = [...queens, ...workers, ...scouts];
-
-        return bees;
+        return this.createBees();
     }
 
-    static createBees(Beetype: BeeRoles) {
-        const bees : Bee[] = [];
-        for (let i = 1; i <= BEE_NUMBERS[Beetype]; i++){
-            bees.push(BeeFactory.createBee(Beetype, this.beeCounter));
-            this.beeCounter++;
-        }
+    static createBees() {
+        const bees: Bee[] = [];
+
+        Object.entries(BEE_CREATION_DETAILS).forEach(([beeType, beeTypeObject]) =>{
+            const amount: number = Object.entries(beeTypeObject)[0][1];
+            for (let i = 1; i <= amount; i++) {
+                bees.push(BeeFactory.createBee(beeType as BeeRoles, this.beeCounter));
+                this.beeCounter++;
+            }
+        });
 
         return bees;
     }

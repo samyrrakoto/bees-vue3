@@ -18,6 +18,7 @@ const BEEMOJIS: Record<BeeRoles, String> = {
     queen: '👑',
     worker: '🐝',
     scout: '🪖',
+    useless: '🗿',
 }
 
 export default defineComponent({
@@ -32,6 +33,7 @@ export default defineComponent({
                 queen: this.bee.role == 'queen',
                 worker: this.bee.role == 'worker',
                 scout: this.bee.role == 'scout',
+                useless: this.bee.role == 'useless',
                 lastHit: this.bee.isLastHit,
                 isDead: this.bee.lp == 0,
             }
@@ -137,6 +139,12 @@ export default defineComponent({
     color: green;
     box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset, rgba(44, 187, 99, .15) 0 1px 2px, rgba(44, 187, 99, .15) 0 2px 4px, rgba(44, 187, 99, .15) 0 4px 8px, rgba(44, 187, 99, .15) 0 8px 16px, rgba(44, 187, 99, .15) 0 16px 32px;
 }
+
+.useless {
+    background-color: rgba(240, 240, 240, 0.26);
+    border: 1px solid #DFDFDF;
+    color: black;
+}
 .lastHit {
     background-image: none;
     background-color: red;
@@ -147,9 +155,5 @@ export default defineComponent({
 .isDead {
     color:gray !important;
     font-weight: bold;
-}
-
-.false{
-    color:red;
 }
 </style>

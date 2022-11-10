@@ -1,3 +1,3 @@
-type BeeRoles = 'queen' | 'worker' | 'scout';
+type BeeRoles = 'queen' | 'worker' | 'scout' | 'useless';
 
 export default BeeRoles;
