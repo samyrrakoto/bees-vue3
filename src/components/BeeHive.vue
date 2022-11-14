@@ -1,24 +1,17 @@
 <template>
     <div class="container">
         <div class="centered-element">
-            <div v-if="!queenIsDead">
-                <SingleBee v-for="(bee, index) in hive" :bee="bee" :key="index" class="bee" />
-            </div>
-            <br><br>
             <div v-if="queenIsDead" class="bn30">
                 <span>GOD SAVE THE QUEEN 😢</span>
-            </div>
-            <div v-if="queenIsDead">
-                <br>
                 <br>
             </div>
-            <div v-if="!queenIsDead">
+            <div v-else>
+                <SingleBee v-for="(bee, index) in hive" :bee="bee" :key="index" class="bee" />
+                <br><br>
                 <HitBee v-on:BeeHit="updateHive" v-on:QueenDead="setQueenAsDead"></HitBee>
-            </div>
-            <div v-if="!queenIsDead">
-                <br>
                 <br>
             </div>
+            <br>
             <ResetGame v-on:GameReset="createNewGame"></ResetGame>
         </div>
     </div>
