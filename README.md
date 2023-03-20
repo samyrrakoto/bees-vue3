@@ -37,14 +37,14 @@ There are 3 different types of bees:
 
 ## Gameplay 
 
-Should be visible on the UI:
-	-- the list of bees associated with their role (Queen, Worker, Scout) and remaining hit points
-	-- a clickable "hit" button
+- Should be visible on the UI:
+	- the list of bees associated with their role (Queen, Worker, Scout) and remaining hit points
+	- a clickable "hit" button
 
-When the button is clicked:
-	-- a random bee should be selected 
-	-- the correct damages should be deduced from its lifespan
+- When the button is clicked:
+	- a random bee should be selected 
+	- the correct damages should be deduced from its lifespan
 
-Please note that:
-	-- if a bee is running out of hit points, then it cannot be randomly selected again
-	-- when all bees are running out of hit points, then the game must be able to reset itself for another round
+- Please note that:
+	- if a bee is running out of hit points, then it cannot be randomly selected again
+	- when all bees are running out of hit points, then the game must be able to reset itself for another round
